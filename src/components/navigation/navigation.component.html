@@ -4,62 +4,57 @@
     <div class="m-header">
       <a href="../dashboard/index.html" class="b-brand text-primary">
         <!-- ========   Change your logo from here   ============ -->
-        <img
-          src="../assets/images/logo-white.svg"
-          alt="logo image"
-          class="logo-lg"
-        />
+
         <span class="badge bg-primary rounded-pill ms-2 theme-version"
-          >v3.1.0</span
+          >v0.0.1-alpha</span
         >
       </a>
     </div>
     <app-profile-expandable></app-profile-expandable>
     <div class="navbar-content">
       <ul class="pc-navbar">
-        <li class="pc-item pc-caption">
-          <label>Navigation</label>
-        </li>
-        <li class="pc-item pc-hasmenu">
-          <a href="#!" class="pc-link">
+        <li class="pc-item" data-ripple>
+          <div class="pc-link">
             <span class="pc-micon">
-              <i class="ph-duotone ph-gauge"></i>
+              <i class="fas fa-home"></i>
             </span>
-            <span class="pc-mtext">Dashboard</span>
-            <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
-          </a>
-          <ul class="pc-submenu">
-            <li class="pc-item">
-              <a class="pc-link" href="../dashboard/analytics.html"
-                >Analytics</a
-              >
-            </li>
-            <li class="pc-item">
-              <a class="pc-link" href="../dashboard/ecommerce.html"
-                >E-commerce</a
-              >
-            </li>
-            <li class="pc-item">
-              <a class="pc-link" href="../dashboard/finance.html">Finance</a>
-            </li>
-            <li class="pc-item">
-              <a class="pc-link" href="../dashboard/project.html">Project</a>
-            </li>
-          </ul>
+            <span class="pc-mtext">Home</span>
+          </div>
         </li>
-
+        <li class="pc-item" data-ripple>
+          <div class="pc-link">
+            <span class="pc-micon">
+              <i class="fas fa-lock"></i>
+            </span>
+            <span class="pc-mtext">Passwords</span>
+          </div>
+        </li>
         <li class="pc-item">
-          <a href="../widget/w_statistics.html" class="pc-link">
+          <div class="pc-link">
             <span class="pc-micon">
-              <i class="ph-duotone ph-projector-screen-chart"></i>
+              <i class="fas fa-user-secret"></i>
             </span>
-            <span class="pc-mtext">Statistics</span>
-          </a>
+            <span class="pc-mtext">Secrets</span>
+          </div>
+        </li>
+        <li class="pc-item">
+          <div class="pc-link">
+            <span class="pc-micon">
+              <i class="fas fa-key"></i>
+            </span>
+            <span class="pc-mtext">Identities</span>
+          </div>
+        </li>
+        <li class="pc-item">
+          <div class="pc-link">
+            <span class="pc-micon">
+              <i class="fas fa-clock"></i>
+            </span>
+            <span class="pc-mtext">Totp</span>
+          </div>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<!-- [ Sidebar Menu ] end -->
-<!-- [ Header Topbar ] start -->
 <app-top-nav></app-top-nav>
