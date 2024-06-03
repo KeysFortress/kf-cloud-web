@@ -23,18 +23,6 @@ import { BarChartComponent } from "../components/bar-chart/bar-chart.component";
 })
 export class AppComponent {
   title = "keysfortress";
-  SevenInHundred: number = 0;
-  /**
-   *
-   */
-  constructor() {
-    for (let i = 1; i <= 100; i++) {
-      console.log(i);
-      let num = i.toString();
-      if (num.includes("7")) {
-        this.SevenInHundred += 1;
-        console.log("Seven");
-      }
-    }
-  }
+
+  constructor() {}
 }
