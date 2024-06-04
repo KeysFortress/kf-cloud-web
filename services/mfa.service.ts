@@ -55,7 +55,7 @@ export class MfaService {
     let response = this.httpClient.post<AuthSuccess>(
       `${this.apiPath}/finish-setup`,
       JSON.stringify(bindingData),
-      { headers: this.headers }
+      { headers: this.mfaHeaders }
     );
 
     let result = await lastValueFrom(response);

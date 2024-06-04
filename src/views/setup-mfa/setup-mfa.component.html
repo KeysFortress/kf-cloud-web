@@ -14,14 +14,22 @@
             [errorCorrectionLevel]="'M'"
           ></qrcode>
         </div>
-        <div class="form-floating mb-0">
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="Email address"
-          />
-          <label for="floatingInput">Time based code</label>
+        <form [formGroup]="formGroup">
+          <div class="form-floating mb-0">
+            <input
+              formControlName="code"
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Email address"
+            />
+            <label for="floatingInput">Time based code</label>
+          </div>
+        </form>
+        <div class="d-grid gap-2 mt-2">
+          <button (click)="onTryAgain()" class="btn btn-primary" type="button">
+            Block Level Button
+          </button>
         </div>
       </div>
 

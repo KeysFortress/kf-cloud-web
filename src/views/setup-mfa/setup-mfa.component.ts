@@ -1,13 +1,13 @@
 import { Component } from "@angular/core";
 import { QRCodeModule } from "angularx-qrcode";
 import { MfaSetupResponse } from "../../../dtos/mfa-setup-response";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MfaService } from "../../../services/mfa.service";
 
 @Component({
   selector: "app-setup-mfa",
   standalone: true,
-  imports: [QRCodeModule],
+  imports: [QRCodeModule, ReactiveFormsModule],
   templateUrl: "./setup-mfa.component.html",
   styleUrl: "./setup-mfa.component.css",
 })
