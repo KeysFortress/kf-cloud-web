@@ -27,7 +27,7 @@ export class MfaService {
     let mfaHeaders = authService.getMfaToken();
     if (mfaHeaders == null) {
       throwError(() => "Failed to get bearer token, redirecting");
-      this.router.navigateByUrl("");
+      // this.router.navigateByUrl("");
       return;
     }
     this.mfaHeaders = mfaHeaders;
