@@ -17,22 +17,27 @@ export const routes: Routes = [
   {
     path: "passwords",
     component: PasswordsComponent,
+    canActivate: [() => authenticationGuard()],
   },
   {
     path: "dashboard",
     component: DashboardComponent,
+    canActivate: [() => authenticationGuard()],
   },
   {
     path: "secrets",
     component: SecretsComponent,
+    canActivate: [() => authenticationGuard()],
   },
   {
     path: "identities",
     component: IdentitiesComponent,
+    canActivate: [() => authenticationGuard()],
   },
   {
     path: "totp",
     component: TotpComponent,
+    canActivate: [() => authenticationGuard()],
   },
   {
     path: "",
@@ -41,6 +46,7 @@ export const routes: Routes = [
   {
     path: "setup-mfa",
     component: SetupMfaComponent,
+    canActivate: [() => mfaAuthenticationGuard()],
   },
   {
     path: "login",
@@ -53,6 +59,7 @@ export const routes: Routes = [
   {
     path: "mfa",
     component: MfaComponent,
+    canActivate: [() => mfaAuthenticationGuard()],
   },
 ];
 
@@ -62,7 +69,8 @@ function mfaAuthenticationGuard(): boolean {
   var loggedIn = authService.mfaTokenPresent();
 
   if (!loggedIn) {
-    return true;
+    router.navigate([""]);
+    return false;
   }
 
   return true;
@@ -71,10 +79,11 @@ function mfaAuthenticationGuard(): boolean {
 function authenticationGuard(): boolean {
   let authService = inject(AuthenticationService);
   let router = inject(Router);
-  var loggedIn = authService.mfaTokenPresent();
+  var loggedIn = authService.isLoggedIn();
   if (!loggedIn) {
-    // router.navigateByUrl("");
-    return true;
+    router.navigate([""]);
+
+    return false;
   }
 
   return true;
