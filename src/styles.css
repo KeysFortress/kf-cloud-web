@@ -19,3 +19,8 @@
 .full-height {
     height: 100vh;
 }
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
