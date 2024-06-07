@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { Component } from "@angular/core";
 import { QRCodeModule } from "angularx-qrcode";
 import { MfaSetupResponse } from "../../../dtos/mfa-setup-response";
@@ -21,7 +22,7 @@ export class SetupMfaComponent {
   /**
    *
    */
-  constructor(private mfaService: MfaService) {}
+  constructor(private mfaService: MfaService, private router: Router) {}
 
   ngOnInit() {
     this.mfaService.GetAuthenticationSecret().then((secret) => {
@@ -36,5 +37,11 @@ export class SetupMfaComponent {
       this.formGroup.value.code!,
       this.qrData.Secret
     );
+
+    if (!result) {
+      alert("Code is not valid");
+    }
+
+    this.router.navigate(["dashboard"]);
   }
 }
