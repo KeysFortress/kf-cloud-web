@@ -91,6 +91,8 @@ export class PasswordService {
       headers: this.headers,
     });
     let result = await lastValueFrom(response);
+    if (result == null) return [];
+
     return result;
   }
 

@@ -9,8 +9,7 @@ export class UtilsService {
   constructor(private router: Router) {}
 
   formatDate(date: Date): string {
-    let timepassed = new Date(date).getTime();
-    let format = moment(timepassed);
+    let format = moment(date);
     var d = format.format("DD/MM/YY");
     return d == "Invalid date" ? "--" : d;
   }
