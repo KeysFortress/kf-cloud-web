@@ -13,7 +13,7 @@
     <app-profile-expandable></app-profile-expandable>
     <div class="navbar-content">
       <ul class="pc-navbar">
-        <li class="pc-item" data-ripple>
+        <li class="pc-item" data-ripple (click)="utils.NavigateTo('dashboard')">
           <div class="pc-link">
             <span class="pc-micon">
               <i class="fas fa-home"></i>
@@ -21,7 +21,7 @@
             <span class="pc-mtext">Home</span>
           </div>
         </li>
-        <li class="pc-item" data-ripple>
+        <li class="pc-item" data-ripple (click)="utils.NavigateTo('passwords')">
           <div class="pc-link">
             <span class="pc-micon">
               <i class="fas fa-lock"></i>
@@ -29,7 +29,7 @@
             <span class="pc-mtext">Passwords</span>
           </div>
         </li>
-        <li class="pc-item">
+        <li class="pc-item" (click)="utils.NavigateTo('secrets')">
           <div class="pc-link">
             <span class="pc-micon">
               <i class="fas fa-user-secret"></i>
@@ -37,7 +37,7 @@
             <span class="pc-mtext">Secrets</span>
           </div>
         </li>
-        <li class="pc-item">
+        <li class="pc-item" (click)="utils.NavigateTo('identities')">
           <div class="pc-link">
             <span class="pc-micon">
               <i class="fas fa-key"></i>
@@ -45,7 +45,7 @@
             <span class="pc-mtext">Identities</span>
           </div>
         </li>
-        <li class="pc-item">
+        <li class="pc-item" (click)="utils.NavigateTo('totp')">
           <div class="pc-link">
             <span class="pc-micon">
               <i class="fas fa-clock"></i>
