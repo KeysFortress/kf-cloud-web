@@ -3,9 +3,7 @@ var flg = '0';
 document.addEventListener('DOMContentLoaded', function () {
   // feather icon start
   feather.replace();
-  // feather icon end
-
-  // remove pre-loader start
+   
   var elem = document.querySelector('.loader-bg');
   elem.fadeOut = function (timing) {
     var newValue = 1;
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         elem.style.opacity = 0;
         elem.style.display = 'none';
         clearInterval(fadeOutInterval);
-      }
+    }
       elem.style.opacity = newValue;
     }, timing);
   };
