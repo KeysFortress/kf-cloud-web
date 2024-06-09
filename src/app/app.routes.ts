@@ -1,6 +1,5 @@
 import { Router, Routes } from "@angular/router";
 import { PasswordsComponent } from "../views/passwords/passwords.component";
-import { DashboardComponent } from "../views/dashboard/dashboard.component";
 import { SecretsComponent } from "../views/secrets/secrets.component";
 import { IdentitiesComponent } from "../views/identities/identities.component";
 import { TotpComponent } from "../views/totp/totp.component";
@@ -12,6 +11,7 @@ import { MfaComponent } from "../views/mfa/mfa.component";
 import { inject } from "@angular/core";
 import { SetupService } from "../../services/setup.service";
 import { AuthenticationService } from "../../services/authentication_service";
+import { DashboardComponent } from "../views/dashboard/dashboard.component";
 
 export const routes: Routes = [
   {
