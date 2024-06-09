@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-bar-chart',
+  selector: "app-bar-chart",
   standalone: true,
   imports: [],
-  templateUrl: './bar-chart.component.html',
-  styleUrl: './bar-chart.component.css'
+  templateUrl: "./bar-chart.component.html",
+  styleUrl: "./bar-chart.component.css",
 })
 export class BarChartComponent {
+  @Input()
+  credentialRequests?: number;
 
+  @Input()
+  newCredentials?: number;
 }
