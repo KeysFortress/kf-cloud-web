@@ -25,4 +25,10 @@ export class UtilsService {
   NavigateTo(page: string) {
     this.router.navigate([page]);
   }
+
+  convertToGb(size?: number) {
+    if (size == null) return 0;
+
+    return size / 1024;
+  }
 }
