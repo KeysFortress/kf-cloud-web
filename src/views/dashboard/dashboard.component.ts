@@ -23,6 +23,7 @@ import {
   ApexStroke,
 } from "ng-apexcharts";
 import { MonthlyActivityEvents } from "../../../models/monthly-activity-events";
+import { ActionEvent } from "../../../models/action-event";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -55,6 +56,7 @@ export class DashboardComponent {
   @ViewChild("chart") chart?: ChartComponent;
   public chartOptions?: ChartOptions;
   monthlyActivityEvents?: MonthlyActivityEvents;
+  Events?: ActionEvent[];
 
   constructor(
     public utils: UtilsService,
@@ -76,6 +78,10 @@ export class DashboardComponent {
     dashboardService.getActivityEvents().then((x) => {
       this.monthlyActivityEvents = x;
       this.renderChart(x);
+    });
+
+    eventService.Take(5, 0).then((x) => {
+      this.Events = x;
     });
   }
 
@@ -158,5 +164,41 @@ export class DashboardComponent {
         },
       },
     };
+  }
+
+  getEventTypeColor(data: ActionEvent) {
+    console.log(data.TypeId);
+    if (
+      data.TypeId == 1 ||
+      data.TypeId == 4 ||
+      data.TypeId == 7 ||
+      data.TypeId == 10
+    ) {
+      return "bg-primary";
+    }
+
+    if (
+      data.TypeId == 2 ||
+      data.TypeId == 5 ||
+      data.TypeId == 8 ||
+      data.TypeId == 11
+    ) {
+      return "bg-warning";
+    }
+
+    if (
+      data.TypeId == 3 ||
+      data.TypeId == 6 ||
+      data.TypeId == 9 ||
+      data.TypeId == 12
+    ) {
+      return "bg-danger";
+    }
+
+    if (data.TypeId == 13) {
+      return "bg-info";
+    }
+
+    return "";
   }
 }

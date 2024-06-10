@@ -138,43 +138,20 @@
         <div class="card task-card">
           <div class="card-header">
             <h5>Events</h5>
+            <a href="#!" class="b-b-primary text-primary">View Friend List</a>
           </div>
           <div class="card-body">
             <ul class="list-unstyled task-list">
+              @for(actionEvent of Events; track actionEvent;){
               <li>
-                <i class="task-icon bg-primary"></i>
-                <p class="m-b-5">Sat, 5 Mar</p>
-                <h6 class="text-muted">Generated a new password</h6>
+                <i class="task-icon {{ getEventTypeColor(actionEvent) }}"></i>
+                <p class="m-b-5">
+                  {{ actionEvent.EventDate }}
+                </p>
+                <h6 class="text-muted">{{ actionEvent.Description }}</h6>
               </li>
-              <li>
-                <i class="task-icon bg-primary"></i>
-                <p class="m-b-5">Sat, 5 Mar</p>
-                <h6 class="text-muted">Generated a new time based code</h6>
-              </li>
-              <li>
-                <i class="task-icon bg-danger"></i>
-                <p class="m-b-5">Sun, 17 Feb</p>
-                <h6 class="text-muted">
-                  <span class="text-primary"
-                    ><a href="#!" class="text-primary">Samsung S20 FE</a></span
-                  >
-                  Deleted user secret with ID:
-                  <span class="text-primary"
-                    ><a href="#!" class="text-primary"
-                      >2314-512312-3123-21.</a
-                    ></span
-                  >
-                </h6>
-              </li>
-              <li>
-                <i class="task-icon bg-warning"></i>
-                <p class="m-b-5">Sat, 18 Mar</p>
-                <h6 class="text-muted">Regnerated passkey: Base Identity</h6>
-              </li>
+              }
             </ul>
-            <div class="text-center">
-              <a href="#!" class="b-b-primary text-primary">View Friend List</a>
-            </div>
           </div>
         </div>
       </div>

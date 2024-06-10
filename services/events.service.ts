@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AuthenticationService } from "./authentication_service";
 import { Router } from "@angular/router";
-import { throwError } from "rxjs";
+import { lastValueFrom, throwError } from "rxjs";
+import { ActionEvent } from "../models/action-event";
 
 @Injectable({
   providedIn: "root",
 })
 export class EventsService {
-  apiPath: string = "v1/dashboard";
+  apiPath: string = "v1/events";
 
   headers!: HttpHeaders;
 
@@ -25,5 +26,21 @@ export class EventsService {
     }
 
     this.headers = headers;
+  }
+
+  public async Take(take: number, skip: number) {
+    let response = this.httpClient.post<ActionEvent[]>(
+      `${this.apiPath}/take`,
+      JSON.stringify({
+        Take: take,
+        Skip: skip,
+      }),
+      {
+        headers: this.headers,
+      }
+    );
+
+    let result = await lastValueFrom(response);
+    return result;
   }
 }

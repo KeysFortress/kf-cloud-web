@@ -1,6 +1,6 @@
 export type ActionEvent = {
   Id: string;
-  EventType: number;
+  TypeId: number;
   Description: string;
   Device: string;
   EventDate: Date;
