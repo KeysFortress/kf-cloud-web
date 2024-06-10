@@ -3,7 +3,7 @@ import { NavigationComponent } from "../../components/navigation/navigation.comp
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { CardComponent } from "../../components/card/card.component";
 import { TopNavComponent } from "../../components/top-nav/top-nav.component";
-import { BarChartComponent } from "../../components/bar-chart/bar-chart.component";
+import { BarChartComponent } from "../../components/pie-chart/pie-chart.component";
 import { DashboardService } from "../../../services/dashboard.service";
 import { CredentialData } from "../../../models/credential-data";
 import { Device } from "../../../models/device";

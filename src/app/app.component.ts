@@ -5,7 +5,6 @@ import { LoaderComponent } from "../components/loader/loader.component";
 
 import { CardComponent } from "../components/card/card.component";
 import { TopNavComponent } from "../components/top-nav/top-nav.component";
-import { BarChartComponent } from "../components/bar-chart/bar-chart.component";
 import { NgApexchartsModule } from "ng-apexcharts";
 
 @Component({
@@ -17,7 +16,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     LoaderComponent,
     CardComponent,
     TopNavComponent,
-    BarChartComponent,
+
     NgApexchartsModule,
   ],
   templateUrl: "./app.component.html",
