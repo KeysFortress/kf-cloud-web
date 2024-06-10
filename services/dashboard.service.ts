@@ -1,3 +1,4 @@
+import { MonthlyActivityEvents } from "./../models/monthly-activity-events";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AuthenticationService } from "./authentication_service";
@@ -6,6 +7,7 @@ import { lastValueFrom, throwError } from "rxjs";
 import { CredentialData } from "../models/credential-data";
 import { Device } from "../models/device";
 import { Storage } from "../models/storage";
+import { ActionEvent } from "../models/action-event";
 
 @Injectable({
   providedIn: "root",
@@ -57,6 +59,25 @@ export class DashboardService {
     });
 
     let result = await lastValueFrom(response);
+    return result;
+  }
+
+  public async getActivityEvents() {
+    let response = this.httpClient.get<MonthlyActivityEvents>(
+      `${this.apiPath}/monthly-activity`,
+      {
+        headers: this.headers,
+      }
+    );
+
+    var result = await lastValueFrom(response);
+    if (result == null) {
+      return {
+        Downloads: [],
+        Uploads: [],
+      };
+    }
+
     return result;
   }
 }

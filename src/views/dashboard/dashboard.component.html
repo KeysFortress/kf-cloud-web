@@ -271,7 +271,7 @@
             <h6 class="text-primary mb-3">Monthly usage</h6>
             <div class="row">
               <div class="col-auto">
-                <h3>300 421</h3>
+                <h3>{{ monthlyActivityEvents?.Downloads?.length }}</h3>
                 <h6 class="d-flex">
                   <i class="feather icon-trending-down text-danger"></i>
                   <span class="mx-2">Download Requests</span>
@@ -282,7 +282,7 @@
                 </span>
               </div>
               <div class="col">
-                <h3>241 229</h3>
+                <h3>{{ monthlyActivityEvents?.Uploads?.length }}</h3>
                 <h6 class="d-flex">
                   <i class="feather icon-trending-up text-primary"></i>
                   <span class="mx-2">Upload Requests</span>
@@ -303,6 +303,7 @@
               [stroke]="chartOptions!.stroke"
               [tooltip]="chartOptions!.tooltip"
               [dataLabels]="chartOptions!.dataLabels"
+              [legend]="chartOptions.legend"
             ></apx-chart>
             }
           </div>

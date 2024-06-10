@@ -11,7 +11,7 @@ import { Storage } from "../../../models/storage";
 import { UtilsService } from "../../../helpers/utils.service";
 import { EventsService } from "../../../services/events.service";
 
-import { NgApexchartsModule } from "ng-apexcharts";
+import { ApexLegend, NgApexchartsModule } from "ng-apexcharts";
 
 import {
   ChartComponent,
@@ -22,6 +22,7 @@ import {
   ApexTooltip,
   ApexStroke,
 } from "ng-apexcharts";
+import { MonthlyActivityEvents } from "../../../models/monthly-activity-events";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -30,6 +31,7 @@ export type ChartOptions = {
   stroke: ApexStroke;
   tooltip: ApexTooltip;
   dataLabels: ApexDataLabels;
+  legend: ApexLegend;
 };
 
 @Component({
@@ -52,6 +54,7 @@ export class DashboardComponent {
   storage?: Storage;
   @ViewChild("chart") chart?: ChartComponent;
   public chartOptions?: ChartOptions;
+  monthlyActivityEvents?: MonthlyActivityEvents;
 
   constructor(
     public utils: UtilsService,
@@ -68,6 +71,10 @@ export class DashboardComponent {
 
     dashboardService.storage().then((x) => {
       this.storage = x;
+    });
+
+    dashboardService.getActivityEvents().then((x) => {
+      this.monthlyActivityEvents = x;
       this.renderChart(x);
     });
   }
@@ -89,21 +96,51 @@ export class DashboardComponent {
     }
   }
 
-  renderChart(x: Storage) {
+  renderChart(x: MonthlyActivityEvents) {
+    const downloads: { [date: string]: number } = x.Downloads.reduce<{
+      [date: string]: number;
+    }>((acc, cur) => {
+      const dateKey =
+        cur.EventDate instanceof Date
+          ? cur.EventDate.toISOString().split("T")[0]
+          : cur.EventDate; // Extracting date part if EventDate is a Date object
+      acc[dateKey] = (acc[dateKey] || 0) + 1;
+      return acc;
+    }, {});
+
+    const uploads: { [date: string]: number } = x.Uploads.reduce<{
+      [date: string]: number;
+    }>((acc, cur) => {
+      const dateKey =
+        cur.EventDate instanceof Date
+          ? cur.EventDate.toISOString().split("T")[0]
+          : cur.EventDate; // Extracting date part if EventDate is a Date object
+      acc[dateKey] = (acc[dateKey] || 0) + 1;
+      return acc;
+    }, {});
+
+    const dates = Object.keys(downloads); // Assuming downloads and uploads have same dates
+    const uploadDates = Object.keys(uploads);
     this.chartOptions = {
       series: [
         {
-          name: "series1",
-          data: [31, 40, 28, 51, 42, 109, 100],
+          name: "Downloads",
+          data: dates.map((date) => downloads[date]),
         },
         {
-          name: "series2",
-          data: [11, 32, 45, 32, 34, 52, 41],
+          name: "Uploads",
+          data: uploadDates.map((date) => uploads[date] || 0), // If there are no uploads for a date, set count to 0
         },
       ],
       chart: {
         height: 215,
         type: "area",
+        toolbar: {
+          show: false,
+        },
+      },
+      legend: {
+        show: false,
       },
       dataLabels: {
         enabled: false,
@@ -113,15 +150,7 @@ export class DashboardComponent {
       },
       xaxis: {
         type: "datetime",
-        categories: [
-          "2018-09-19T00:00:00.000Z",
-          "2018-09-19T01:30:00.000Z",
-          "2018-09-19T02:30:00.000Z",
-          "2018-09-19T03:30:00.000Z",
-          "2018-09-19T04:30:00.000Z",
-          "2018-09-19T05:30:00.000Z",
-          "2018-09-19T06:30:00.000Z",
-        ],
+        categories: dates,
       },
       tooltip: {
         x: {
