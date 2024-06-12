@@ -12,6 +12,7 @@ import { inject } from "@angular/core";
 import { SetupService } from "../../services/setup.service";
 import { AuthenticationService } from "../../services/authentication_service";
 import { DashboardComponent } from "../views/dashboard/dashboard.component";
+import { StorageComponent } from "../views/storage/storage.component";
 
 export const routes: Routes = [
   {
@@ -39,6 +40,12 @@ export const routes: Routes = [
     component: TotpComponent,
     canActivate: [() => authenticationGuard()],
   },
+  {
+    path: "storage",
+    component: StorageComponent,
+    canActivate: [() => authenticationGuard()],
+  },
+
   {
     path: "",
     component: SetupComponent,
