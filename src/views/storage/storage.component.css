@@ -1,0 +1,26 @@
+.onMouseOver {
+    display: none;
+}
+
+.onMouseOver:after:hover {
+    display: inline;
+}
+
+.tabOverride {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+.tabOverride>li {
+    width: 100%;
+}
+
+.center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
