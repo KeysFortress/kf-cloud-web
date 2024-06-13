@@ -167,7 +167,6 @@ export class DashboardComponent {
   }
 
   getEventTypeColor(data: ActionEvent) {
-    console.log(data.TypeId);
     if (
       data.TypeId == 1 ||
       data.TypeId == 4 ||

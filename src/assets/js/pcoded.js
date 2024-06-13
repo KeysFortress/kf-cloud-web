@@ -129,23 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   // component- dropdown scrollbar end
 
-  var sidebar_hide = document.querySelector('#sidebar-hide');
-  if (sidebar_hide) {
-    sidebar_hide.addEventListener('click', function () {
-      if (document.querySelector('.pc-sidebar').classList.contains('pc-sidebar-hide')) {
-        document.querySelector('.pc-sidebar').classList.remove('pc-sidebar-hide');
-      } else {
-        document.querySelector('.pc-sidebar').classList.add('pc-sidebar-hide');
-      }
-    });
-  }
-
-  if (!!document.querySelector('.trig-drp-search')) {
-    const search_drp = document.querySelector('.trig-drp-search');
-    search_drp.addEventListener('shown.bs.dropdown', (event) => {
-      document.querySelector('.drp-search input').focus();
-    });
-  }
+  
 });
 
 // Menu click start

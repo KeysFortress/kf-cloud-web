@@ -24,3 +24,15 @@
     display: flex;
     flex-direction: column;
 }
+
+.pc-container-removed {
+    position: relative;
+    top: 60px;
+    min-height: calc(100vh - 121px);
+}
+
+.pc-container-removed .pc-content {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+}

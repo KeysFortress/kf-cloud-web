@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-top-nav',
+  selector: "app-top-nav",
   standalone: true,
   imports: [],
-  templateUrl: './top-nav.component.html',
-  styleUrl: './top-nav.component.css'
+  templateUrl: "./top-nav.component.html",
+  styleUrl: "./top-nav.component.css",
 })
-export class TopNavComponent {
-
-}
+export class TopNavComponent {}
