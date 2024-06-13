@@ -1,9 +1,13 @@
+import { StorageItem } from "./../../../models/storage-item";
 import { Component } from "@angular/core";
 import { NavigationComponent } from "../../components/navigation/navigation.component";
 import { TopNavComponent } from "../../components/top-nav/top-nav.component";
 import { CardComponent } from "../../components/card/card.component";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { StorageService } from "../../../services/storage.service";
+import { UtilsService } from "../../../helpers/utils.service";
+import { last } from "rxjs";
 
 @Component({
   selector: "app-storage",
@@ -18,4 +22,53 @@ import { ReactiveFormsModule } from "@angular/forms";
   templateUrl: "./storage.component.html",
   styleUrl: "./storage.component.css",
 })
-export class StorageComponent {}
+export class StorageComponent {
+  storageItems: StorageItem[] = [];
+  selected: string = "";
+  selectedItem?: StorageItem;
+  lastOpenFolder: string = "";
+  /**
+   *
+   */
+  constructor(
+    public utils: UtilsService,
+    private storageService: StorageService
+  ) {}
+
+  ngOnInit() {
+    this.storageService.get("").then((x) => {
+      this.storageItems = x;
+    });
+  }
+
+  select(storageItem: StorageItem) {
+    this.selected = storageItem.Name;
+    this.selectedItem = storageItem;
+  }
+
+  async open() {
+    if (this.selectedItem != null && this.selectedItem.IsDirectory) {
+      this.storageItems = await this.storageService.getDirectory(
+        this.selectedItem.AbsolutePath
+      );
+      this.lastOpenFolder = this.selectedItem.AbsolutePath;
+    }
+
+    //TODO Download the file otherwise.
+
+    console.log("presed");
+  }
+
+  async Goto(item: string) {
+    let prevLink = "";
+    let result = this.lastOpenFolder.split("/");
+    for (var current in result) {
+      if (result[current] == item) {
+        break;
+      }
+      prevLink += result[current] + "/";
+    }
+    this.storageItems = await this.storageService.getDirectory(prevLink);
+    this.lastOpenFolder = prevLink;
+  }
+}

@@ -80,9 +80,11 @@
     <div class="row">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-default-icon">
-          <li class="breadcrumb-item"><a href="#!">Home</a></li>
-          <li class="breadcrumb-item"><a href="#!">Library</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Data</li>
+          @for(item of lastOpenFolder.split('/'); track item;){
+          <li class="breadcrumb-item active" aria-current="page">
+            <a (click)="Goto(item)">{{ item }}</a>
+          </li>
+          }
         </ol>
       </nav>
     </div>
@@ -102,19 +104,34 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  @for(storageItem of storageItems; track storageItem;) {
+                  <tr
+                    (dblclick)="open()"
+                    (click)="select(storageItem)"
+                    class="{{
+                      storageItem.Name == selected ? 'row-selected' : ''
+                    }}"
+                  >
                     <td>
                       <div class="d-inline-block align-middle">
+                        @if(storageItem.IsDirectory) {
                         <i class="fas fa-folder wid-40"></i>
+
+                        } @else{
+                        <i class="fas fa-file wid-40"></i>
+                        }
+
                         <div class="d-inline-block">
-                          <h6>John Deo</h6>
+                          <h6>{{ storageItem.Name }}</h6>
                         </div>
                       </div>
                     </td>
-                    <td>me,Able Pro</td>
-                    <td>Jun, 26</td>
+                    <td>Me</td>
+                    <td>{{ utils.formatDate(storageItem.UpdatedAt) }}</td>
                     <td class="text-end">
-                      <label class="badge bg-light-danger">22GB</label>
+                      <label class="badge bg-light-danger">
+                        {{ utils.convertToGb(storageItem.Size) }}
+                      </label>
                     </td>
 
                     <td class="text-end">
@@ -135,26 +152,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <div class="d-inline-block align-middle">
-                        <i class="fas fa-file wid-40"></i>
-
-                        <div class="d-inline-block">
-                          <h6>Jenifer Vintage</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>me</td>
-                    <td>March, 31</td>
-                    <td class="text-end">
-                      <label class="badge bg-light-primary">2GB</label>
-                    </td>
-
-                    <td class="text-end">
-                      <label class="badge bg-light-primary">2GB</label>
-                    </td>
-                  </tr>
+                  }
                 </tbody>
               </table>
             </div>

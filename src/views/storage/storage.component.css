@@ -24,3 +24,7 @@
     display: flex;
     justify-content: center;
 }
+
+.row-selected {
+    background: #f2f6f6;
+}
