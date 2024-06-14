@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { StorageService } from "../../../services/storage.service";
 import { UtilsService } from "../../../helpers/utils.service";
 import { last } from "rxjs";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-storage",
@@ -27,6 +28,8 @@ export class StorageComponent {
   selected: string = "";
   selectedItem?: StorageItem;
   lastOpenFolder: string = "";
+  loaderActive: boolean = false;
+
   /**
    *
    */
@@ -36,8 +39,10 @@ export class StorageComponent {
   ) {}
 
   ngOnInit() {
+    this.loaderActive = true;
     this.storageService.get("").then((x) => {
       this.storageItems = x;
+      // this.loaderActive = false;
     });
   }
 
@@ -64,11 +69,14 @@ export class StorageComponent {
     let result = this.lastOpenFolder.split("/");
     for (var current in result) {
       if (result[current] == item) {
+        prevLink += result[current] + "/";
         break;
       }
       prevLink += result[current] + "/";
     }
+    this.loaderActive = true;
     this.storageItems = await this.storageService.getDirectory(prevLink);
     this.lastOpenFolder = prevLink;
+    this.loaderActive = false;
   }
 }
