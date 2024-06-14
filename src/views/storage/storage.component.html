@@ -9,11 +9,11 @@
           <div class="card-body">
             <div class="row">
               <div class="col">
-                <h3>4000</h3>
-                <p>Most Played Last Month</p>
+                <h3>{{ totalItems }}</h3>
+                <p>Total Items</p>
               </div>
               <div class="col-auto">
-                <i class="material-icons-two-tone text-primary f-30">chat</i>
+                <i class="fas fa-file-upload text-primary mb-1"></i>
               </div>
             </div>
             <div class="progress">
@@ -32,13 +32,11 @@
           <div class="card-body">
             <div class="row">
               <div class="col">
-                <h3>2500</h3>
-                <p>Coffee cups per day</p>
+                <h3>{{ totalConsumed }} GB</h3>
+                <p>Consumed</p>
               </div>
               <div class="col-auto">
-                <i class="material-icons-two-tone text-info f-30"
-                  >free_breakfast</i
-                >
+                <i class="fas fa-database text-primary mb-1"></i>
               </div>
             </div>
             <div class="progress">
@@ -57,13 +55,11 @@
           <div class="card-body">
             <div class="row">
               <div class="col">
-                <h3>800 Gb</h3>
-                <p>Average Monthly Uploads</p>
+                <h3>{{ totalStorage }} Gb</h3>
+                <p>Total Storage</p>
               </div>
               <div class="col-auto">
-                <i class="material-icons-two-tone text-danger f-30"
-                  >cloud_upload</i
-                >
+                <i class="fas fa-chart-pie text-primary mb-1"></i>
               </div>
             </div>
             <div class="progress">
@@ -209,6 +205,7 @@
                   <h6>Who has access?</h6>
                 </div>
                 <div class="d-flex flex-wrap gap-2">
+                  @for(sharedWith of selectedItem?.Shared; track sharedWith){
                   <button
                     type="button"
                     class="btn btn-info"
@@ -216,18 +213,10 @@
                     data-bs-html="true"
                     data-bs-original-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>"
                   >
-                    Georgegmail.com
+                    {{ sharedWith }}
                   </button>
 
-                  <button
-                    type="button"
-                    class="btn btn-info"
-                    data-bs-toggle="tooltip"
-                    data-bs-html="true"
-                    data-bs-original-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>"
-                  >
-                    petergmail.com
-                  </button>
+                  }
                 </div>
                 <button
                   type="button"
@@ -238,42 +227,62 @@
                 </button>
                 <hr />
                 <div class="row my-3">
-                  <h6>Details for the folder</h6>
+                  <h6>
+                    Details for the
+                    {{ selectedItem?.IsDirectory ? "Directory" : "File" }}
+                  </h6>
                 </div>
+
+                @if(selectedItem != null && selectedItem.IsDirectory){
 
                 <div class="row my-3">
                   <p class="mb-1">Total children:</p>
                   <p class="text-muted mb-1">10</p>
                 </div>
+                }
 
                 <div class="row my-3">
                   <p class="mb-1">Size:</p>
-                  <p class="text-muted mb-1">10GB</p>
+                  <p class="text-muted mb-1">
+                    {{ utils.convertToGb(selectedItem?.Size) }}
+                  </p>
                 </div>
 
                 <div class="row my-3">
                   <p class="mb-1">Created at:</p>
-                  <p class="text-muted mb-1">10/10/10</p>
+                  <p class="text-muted mb-1">
+                    {{
+                      selectedItem != null
+                        ? utils.formatDate(selectedItem.UpdatedAt)
+                        : "--"
+                    }}
+                  </p>
                 </div>
 
                 <div class="row my-3">
                   <p class="mb-1">Updated at:</p>
-                  <p class="text-muted mb-1">10/10/10</p>
+                  <p class="text-muted mb-1">
+                    {{
+                      selectedItem != null
+                        ? utils.formatDate(selectedItem.UpdatedAt)
+                        : "--"
+                    }}
+                  </p>
                 </div>
                 <hr />
                 <div class="row my-3">
-                  <form>
+                  <form [formGroup]="formGroup">
                     <div class="row">
                       <div class="form-floating mb-0">
                         <input
-                          formControlName="email"
+                          formControlName="name"
                           type="email"
                           class="form-control"
                           id="floatingInput"
-                          placeholder="Email address"
+                          placeholder="File Namme"
                         />
                         <label for="floatingInput" class="mx-2"
-                          >Email address</label
+                          >File Name</label
                         >
                       </div>
                     </div>

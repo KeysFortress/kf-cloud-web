@@ -6,4 +6,5 @@ export type StorageItem = {
   ItemsCount: number;
   IsDirectory: boolean;
   AbsolutePath: string;
+  Shared: string[];
 };

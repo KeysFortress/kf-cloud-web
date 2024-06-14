@@ -4,7 +4,7 @@ import { NavigationComponent } from "../../components/navigation/navigation.comp
 import { TopNavComponent } from "../../components/top-nav/top-nav.component";
 import { CardComponent } from "../../components/card/card.component";
 import { LoaderComponent } from "../../components/loader/loader.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { StorageService } from "../../../services/storage.service";
 import { UtilsService } from "../../../helpers/utils.service";
 import { last } from "rxjs";
@@ -29,6 +29,13 @@ export class StorageComponent {
   selectedItem?: StorageItem;
   lastOpenFolder: string = "";
   loaderActive: boolean = false;
+  totalItems: number = 0;
+  totalConsumed: number = 0;
+  totalStorage: number = 0;
+
+  formGroup = new FormGroup({
+    name: new FormControl(""),
+  });
 
   /**
    *
@@ -49,6 +56,9 @@ export class StorageComponent {
   select(storageItem: StorageItem) {
     this.selected = storageItem.Name;
     this.selectedItem = storageItem;
+    this.formGroup.setValue({
+      name: this.selectedItem!.Name,
+    });
   }
 
   async open() {
