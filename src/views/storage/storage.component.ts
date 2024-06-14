@@ -89,4 +89,18 @@ export class StorageComponent {
     this.lastOpenFolder = prevLink;
     this.loaderActive = false;
   }
+
+  shareItem(item: StorageItem[]) {
+    throw new Error("Method not implemented.");
+  }
+
+  async onDeleteItem(item: StorageItem) {
+    let result = await this.storageService.delete(item.AbsolutePath);
+  }
+
+  editItem(item: StorageItem) {}
+
+  async downloadItem(item: StorageItem) {
+    await this.storageService.download(item.AbsolutePath, item.Name);
+  }
 }

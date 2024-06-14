@@ -138,19 +138,35 @@
                     </td>
 
                     <td class="text-end">
-                      <button type="button" class="btn btn-icon btn-link-info">
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-link-info"
+                        (click)="shareItem(storageItems)"
+                      >
                         <i class="fas fa-share-alt"></i>
                       </button>
 
-                      <button type="button" class="btn btn-icon btn-link-info">
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-link-info"
+                        (click)="downloadItem(storageItem)"
+                      >
                         <i class="fas fa-cloud-download-alt"></i>
                       </button>
 
-                      <button type="button" class="btn btn-icon btn-link-info">
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-link-info"
+                        (click)="editItem(storageItem)"
+                      >
                         <i class="fas fa-edit"></i>
                       </button>
 
-                      <button type="button" class="btn btn-icon btn-link-info">
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-link-info"
+                        (click)="onDeleteItem(storageItem)"
+                      >
                         <i class="material-icons-two-tone">delete_outline</i>
                       </button>
                     </td>
