@@ -42,7 +42,7 @@ export class StorageComponent {
     this.loaderActive = true;
     this.storageService.get("").then((x) => {
       this.storageItems = x;
-      // this.loaderActive = false;
+      this.loaderActive = false;
     });
   }
 
