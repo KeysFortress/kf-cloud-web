@@ -75,12 +75,15 @@ export class AuthenticationService {
     return moment(expiresAt);
   }
 
-  public getToken(): HttpHeaders | undefined {
+  public getToken(
+    contentType: string = "application/json"
+  ): HttpHeaders | undefined {
     let token = localStorage.getItem("id_token");
     if (token == null) return undefined;
 
-    let headers = new HttpHeaders({
-      "Content-Type": "application/json",
+    let headers;
+    headers = new HttpHeaders({
+      "Content-Type": contentType,
       Authorization: `Bearer ${token}`,
     });
 

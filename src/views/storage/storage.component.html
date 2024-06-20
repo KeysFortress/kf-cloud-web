@@ -87,7 +87,12 @@
     <div class="row">
       <div class="col-xl-8">
         <div class="card bg-light">
-          <div class="card-body">
+          <div
+            class="card-body"
+            appFileDragNDrop
+            appFileDragNDrop
+            (filesChangeEmitter)="onFilesDropped($event)"
+          >
             @if(loaderActive){
             <div class="center-spinner">
               <div _ngcontent-ng-c4084266675="" class="pc-loader">

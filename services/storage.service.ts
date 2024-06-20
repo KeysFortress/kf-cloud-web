@@ -11,7 +11,7 @@ import { StorageItem } from "../models/storage-item";
 })
 export class StorageService {
   apiPath: string = "v1/storage";
-
+  dragAreaClass?: string;
   headers!: HttpHeaders;
 
   constructor(
@@ -100,6 +100,37 @@ export class StorageService {
 
     let result = await lastValueFrom(response);
     return result;
+  }
+
+  async upload(event: File[], path: string): Promise<boolean> {
+    const formData: FormData = new FormData();
+
+    for (const file of event) {
+      formData.append("file", file, file.name);
+    }
+
+    formData.append("path", path);
+    var boundary = Math.random().toString().substr(2);
+    const headers = this.authService.getToken(
+      "multipart/form-data; boundary=--" + boundary
+    );
+    console.log(boundary);
+    try {
+      var h = new HttpHeaders({
+        Authorization: this.headers.get("Authorization")!,
+      });
+      let response = await this.httpClient.post<boolean>(
+        `${this.apiPath}/upload`,
+        formData,
+        { headers: h }
+      );
+
+      let result = await lastValueFrom(response);
+      return result;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      return false;
+    }
   }
 
   async download(path: string, fileName: string): Promise<void> {

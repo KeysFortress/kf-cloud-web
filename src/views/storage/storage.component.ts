@@ -9,6 +9,7 @@ import { StorageService } from "../../../services/storage.service";
 import { UtilsService } from "../../../helpers/utils.service";
 import { last } from "rxjs";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { FileDragNDropDirective } from "../../../services/file-drop-service";
 
 @Component({
   selector: "app-storage",
@@ -19,6 +20,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     CardComponent,
     LoaderComponent,
     ReactiveFormsModule,
+    FileDragNDropDirective,
   ],
   templateUrl: "./storage.component.html",
   styleUrl: "./storage.component.css",
@@ -36,6 +38,7 @@ export class StorageComponent {
   formGroup = new FormGroup({
     name: new FormControl(""),
   });
+  dragAreaClass: any;
 
   /**
    *
@@ -100,6 +103,17 @@ export class StorageComponent {
 
   editItem(item: StorageItem) {}
 
+  async onFilesDropped(event: File[]) {
+    let result = await this.storageService.upload(event, this.lastOpenFolder);
+    if (!result) alert("upload failed");
+
+    this.loaderActive = true;
+    this.storageItems = await this.storageService.getDirectory(
+      this.lastOpenFolder
+    );
+    this.lastOpenFolder = this.lastOpenFolder;
+    this.loaderActive = false;
+  }
   async downloadItem(item: StorageItem) {
     await this.storageService.download(item.AbsolutePath, item.Name);
   }
