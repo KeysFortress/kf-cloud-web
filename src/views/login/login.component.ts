@@ -23,6 +23,13 @@ export class LoginComponent {
     this._authService = authService;
   }
 
+  async ngOnInit() {
+    let loggedIn = await this._authService.isLoggedIn();
+    if (loggedIn) {
+      this.router.navigate(["dashboard"]);
+    }
+  }
+
   formGroup = new FormGroup({
     email: new FormControl(""),
   });

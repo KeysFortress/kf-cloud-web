@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { QRCodeModule } from "angularx-qrcode";
 import { SetupService } from "../../../services/setup.service";
 import { Router } from "@angular/router";
+import { AuthenticationService } from "../../../services/authentication_service";
 
 @Component({
   selector: "app-setup",
@@ -13,13 +14,23 @@ import { Router } from "@angular/router";
 export class SetupComponent {
   qrData: string = "dwadwadwa";
 
-  constructor(private setupService: SetupService, private router: Router) {}
+  constructor(
+    private setupService: SetupService,
+    private router: Router,
+    private authService: AuthenticationService
+  ) {}
 
   async ngOnInit() {
     let isEmpty = await this.setupService.isConfigured();
-    if (!isEmpty) {
+    let loggedIn = await this.authService.isLoggedIn();
+    if (!isEmpty && !loggedIn) {
       this.router.navigate(["login"]);
     }
+
+    if (loggedIn) {
+      this.router.navigate(["dashboard"]);
+    }
+
     this.setupService
       .initSetup()
       .then((x) => {
