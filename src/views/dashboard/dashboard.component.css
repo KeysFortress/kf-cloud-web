@@ -1,0 +1,26 @@
+.pc-container .pc-content {
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 20px;
+}
+
+/* Media query for screens with a width of 1920px or smaller */
+@media (max-width: 1920px) {
+    .pc-container .pc-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+}
+
+/* Media query for high-resolution but physically smaller screens (like 4K laptops) */
+@media (min-width: 1080px) and (max-resolution: 2dppx) {}
+
+/* Media query for 16:10 aspect ratio */
+@media (max-width: 1920px) and (aspect-ratio: 16/10) {
+    .pc-container .pc-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+}

@@ -1,3 +1,4 @@
+import { Storage } from "./../models/storage";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import moment from "moment";

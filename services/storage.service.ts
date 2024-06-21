@@ -5,6 +5,7 @@ import { AuthenticationService } from "./authentication_service";
 import { Router } from "@angular/router";
 import { lastValueFrom, throwError } from "rxjs";
 import { StorageItem } from "../models/storage-item";
+import { SysInfo } from "../models/sys-info";
 
 @Injectable({
   providedIn: "root",
@@ -42,6 +43,16 @@ export class StorageService {
     let result = await lastValueFrom(response);
     return result;
   }
+
+  async info(): Promise<SysInfo> {
+    let response = this.httpClient.get<SysInfo>(`${this.apiPath}/info`, {
+      headers: this.headers,
+    });
+
+    let result = await lastValueFrom(response);
+    return result;
+  }
+
   async getDirectory(folderPath: string): Promise<StorageItem[]> {
     let response = this.httpClient.post<StorageItem[]>(
       `${this.apiPath}/path`,

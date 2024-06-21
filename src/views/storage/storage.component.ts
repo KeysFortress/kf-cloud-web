@@ -10,6 +10,7 @@ import { UtilsService } from "../../../helpers/utils.service";
 import { last } from "rxjs";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { FileDragNDropDirective } from "../../../services/file-drop-service";
+import { SysInfo } from "../../../models/sys-info";
 
 @Component({
   selector: "app-storage",
@@ -34,15 +35,13 @@ export class StorageComponent {
   totalItems: number = 0;
   totalConsumed: number = 0;
   totalStorage: number = 0;
+  sysInfo?: SysInfo;
 
   formGroup = new FormGroup({
     name: new FormControl(""),
   });
   dragAreaClass: any;
 
-  /**
-   *
-   */
   constructor(
     public utils: UtilsService,
     private storageService: StorageService
@@ -53,6 +52,12 @@ export class StorageComponent {
     this.storageService.get("").then((x) => {
       this.storageItems = x;
       this.loaderActive = false;
+    });
+    this.storageService.info().then((x) => {
+      this.sysInfo = x;
+      this.totalConsumed = x.Disk - x.Free;
+      this.totalStorage = x.Disk;
+      this.totalItems = x.Free;
     });
   }
 

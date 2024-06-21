@@ -1,3 +1,5 @@
+import { Storage } from "./../../../models/storage";
+import { StorageService } from "./../../../services/storage.service";
 import { Component, ViewChild } from "@angular/core";
 import { NavigationComponent } from "../../components/navigation/navigation.component";
 import { LoaderComponent } from "../../components/loader/loader.component";
@@ -7,7 +9,6 @@ import { BarChartComponent } from "../../components/pie-chart/pie-chart.componen
 import { DashboardService } from "../../../services/dashboard.service";
 import { CredentialData } from "../../../models/credential-data";
 import { Device } from "../../../models/device";
-import { Storage } from "../../../models/storage";
 import { UtilsService } from "../../../helpers/utils.service";
 import { EventsService } from "../../../services/events.service";
 
@@ -24,6 +25,7 @@ import {
 } from "ng-apexcharts";
 import { MonthlyActivityEvents } from "../../../models/monthly-activity-events";
 import { ActionEvent } from "../../../models/action-event";
+import { SysInfo } from "../../../models/sys-info";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -61,7 +63,8 @@ export class DashboardComponent {
   constructor(
     public utils: UtilsService,
     private dashboardService: DashboardService,
-    private eventService: EventsService
+    private eventService: EventsService,
+    private storageService: StorageService
   ) {
     dashboardService.credentialData().then((x) => {
       this.credentialData = x;
@@ -82,6 +85,17 @@ export class DashboardComponent {
 
     eventService.Take(5, 0).then((x) => {
       this.Events = x;
+    });
+
+    storageService.info().then((x) => {
+      this.storage = {
+        Available: x.Free,
+        FilesCount: 0,
+        Total: x.Disk,
+        Used: x.Disk - x.Free,
+        TotalDownloads: 0,
+        TotalUploads: 0,
+      };
     });
   }
 
